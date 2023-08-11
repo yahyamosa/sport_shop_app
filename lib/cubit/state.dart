@@ -14,3 +14,15 @@ class seccesgetlive extends state{}
 class faildgetlive extends state{}
 
 class secssedel extends state{}
+
+
+class secsselogin extends state{}
+class lodlogin extends state{}
+
+
+class secssesingup extends state{}
+class lodlsungin extends state{}
+
+
+class ok extends state{}
+class notok extends state{}

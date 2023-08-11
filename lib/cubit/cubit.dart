@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/cubit/state.dart';
@@ -27,6 +28,7 @@ int a = 0 ;
 
   CollectionReference getdata = FirebaseFirestore.instance.collection('prodect');
   CollectionReference live = FirebaseFirestore.instance.collection('fav');
+
 
 
   List<prodectModel> data = [];
@@ -77,9 +79,46 @@ int a = 0 ;
 
 
   }
-  Future<void> deleat()async{
-    var id  =  live.id;
-    await live.doc(id).delete();
+
+
+
+   Future<void> deleat() async{
+     String uid = FirebaseFirestore.instance.collection('fav').doc().id;
+  var a  = await  FirebaseFirestore.instance.collection('fav').doc(uid).delete();
+     print(uid);
     emit(secssedel());
   }
+
+  Future<void> login({required String email ,required String passworld})async{
+    emit(lodlogin());
+    var auth = FirebaseAuth.instance;
+   await auth.signInWithEmailAndPassword(email: email, password: passworld);
+   emit(secsselogin());
+  }
+
+  Future<void> suingup({required String email ,required String passworld})async{
+    emit(lodlsungin());
+    var auth = FirebaseAuth.instance;
+     await auth.createUserWithEmailAndPassword(email: email, password:passworld);
+     emit(secssesingup());
+  }
+
+List<prodectModel> searchlist = [] ;
+  searchdata({required prodectModel prodect})async{
+    searchlist.clear();
+    for(int i = 0 ; i < data.length ; i++){
+      if(data[i].name == prodect.name){
+      searchlist = data ;
+        emit(ok());
+        print(searchlist.length);
+        print('ok');
+        return searchlist ;
+      }else{
+        emit(notok());
+      }
+
+    }
+  }
+
+
 }
