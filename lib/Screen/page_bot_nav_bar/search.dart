@@ -4,7 +4,7 @@ import 'package:shopapp/cubit/cubit.dart';
 import 'package:shopapp/cubit/state.dart';
 import 'package:shopapp/model/prodect_model.dart';
 
-
+// search page
 class search extends StatefulWidget {
    search({super.key});
 
