@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/Screen/home.dart';
+import 'package:shopapp/Screen/page_bot_nav_bar/accont.dart';
 import 'package:shopapp/cubit/cubit.dart';
 import 'package:shopapp/cubit/state.dart';
 
@@ -109,7 +110,8 @@ TextEditingController cont2 = TextEditingController();
                     Container(
                       width: double.infinity,
                       child: MaterialButton(onPressed: (){
-                         BlocProvider.of<cubitui>(context).suingup(email:cont1.text.toString(), passworld:cont2.text.toString());
+                        Navigator.push(context,MaterialPageRoute(builder:(context)=>accont()) );
+                        // BlocProvider.of<cubitui>(context).suingup(email:cont1.text.toString(), passworld:cont2.text.toString());
                       } ,
                         color: Colors.red,
                         child:state is lodlsungin ?Container(

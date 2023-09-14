@@ -26,3 +26,10 @@ class lodlsungin extends state{}
 
 class ok extends state{}
 class notok extends state{}
+
+class secssegooglesigin extends state{}
+
+
+class secssedeleat extends state{}
+
+class secsses_search extends state{}

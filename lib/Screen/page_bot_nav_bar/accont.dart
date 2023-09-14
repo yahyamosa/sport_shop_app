@@ -14,11 +14,16 @@ class accont extends StatefulWidget {
 
 class _accontState extends State<accont> {
   @override
+  void initState() {
+   BlocProvider.of<cubitui>(context).getData();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return  BlocConsumer<cubitui , state>(
         builder:(context , state){
-          List<prodectModel> mylist = BlocProvider.of<cubitui>(context).livedata;
-          var data = BlocProvider.of<cubitui>(context).getfiv();
+
+          List<prodectModel> mylist = BlocProvider.of<cubitui>(context).data;
+
       return Scaffold(
           body:Column(
             children: [
@@ -64,8 +69,8 @@ class _accontState extends State<accont> {
                                     ) ,
                                     SizedBox(width: MediaQuery.of(context).size.width /2.2,),
                                     IconButton(onPressed:(){
-                                      BlocProvider.of<cubitui>(context).deleat();
-                                      BlocProvider.of<cubitui>(context).getfiv();
+                                      BlocProvider.of<cubitui>(context).deleatdoc(index:7);
+                                      BlocProvider.of<cubitui>(context).getData();
                                     }, icon:Icon(Icons.delete , color: Colors.grey,))
                                   ],
                                 )

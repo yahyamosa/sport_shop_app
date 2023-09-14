@@ -70,7 +70,10 @@ TextEditingController cont2 = TextEditingController();
                           Navigator.push(context,MaterialPageRoute(builder:(context)=>signup()));
                         }, child:Text("regester?")),
                       ],
-                    )
+                    ) , 
+                    IconButton(onPressed:()async{
+                     await BlocProvider.of<cubitui>(context).sigin();
+                    }, icon:Icon(Icons.supervised_user_circle))
                   ],
                 ),
               ),

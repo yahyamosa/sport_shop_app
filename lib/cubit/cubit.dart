@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shopapp/cubit/state.dart';
 
 import '../Screen/page_bot_nav_bar/accont.dart';
@@ -21,7 +22,7 @@ class cubitui extends Cubit<state>{
     card()
   ];
 int a = 0 ;
-  void setbottomnavbar(int i ){
+  void setbottomnavbar(int i){
      a = i ;
      emit(secces());
   }
@@ -119,6 +120,55 @@ List<prodectModel> searchlist = [] ;
 
     }
   }
+
+
+  GoogleSignIn googlesignIn = GoogleSignIn(scopes: ['email']);
+
+  Future<void> sigin()async{
+   try
+   {
+    GoogleSignInAccount? a =  await googlesignIn.signIn();
+    print(a?.email);
+     emit(secssegooglesigin());
+     print('goood');
+   }
+   catch(e)
+   {
+     print(e.toString());
+   }
+  }
+
+Future<void> sigout()async{
+    await googlesignIn.signOut();
+}
+
+Future<void> deleatdoc({required int index})async{
+try
+{
+  getdata.snapshots().listen((event) {
+    String id = event.docs[index].id;
+    String uid = FirebaseFirestore.instance.collection("").doc().id;
+    print(uid);
+    //print(id.toString());
+    print('good');
+    getdata.doc("aKS1vR7GqSFfnp4fNjQf").delete();
+    emit(secssedeleat());
+  });
+}
+catch (e)
+{
+  print(e.toString());}
+}
+
+
+// example
+List<prodectModel> mysearche = [];
+
+void searchitem(String name){
+  mysearche = data.where((element) => element.name!.toString().toLowerCase().contains(name.toLowerCase())).toList();
+  emit(secsses_search());
+}
+
 
 
 }

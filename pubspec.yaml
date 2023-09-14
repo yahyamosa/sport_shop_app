@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore: ^4.8.3
   firebase_auth: ^4.7.2
   flutter_paypal_checkout: ^1.0.1
+  google_sign_in:
 
 dev_dependencies:
   flutter_test:

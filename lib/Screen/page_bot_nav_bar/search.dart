@@ -4,6 +4,7 @@ import 'package:shopapp/cubit/cubit.dart';
 import 'package:shopapp/cubit/state.dart';
 import 'package:shopapp/model/prodect_model.dart';
 
+
 class search extends StatefulWidget {
    search({super.key});
 
@@ -17,19 +18,25 @@ class _searchState extends State<search> {
   Widget build(BuildContext context) {
     return BlocConsumer<cubitui , state>(
         builder:(context , state){
-          List<prodectModel> mylist = BlocProvider.of<cubitui>(context).searchlist;
+
+          List<prodectModel> mylist = BlocProvider.of<cubitui>(context).mysearche;
+
       return Scaffold(
           body: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 50 , left: 20 , right: 20),
                 child: TextFormField(
+                  onChanged:(val){
+                    mylist.clear();
+                    BlocProvider.of<cubitui>(context).searchitem(val);
+                  },
                   controller:cont ,
                   decoration: InputDecoration(
                       label: Text('search'),
                       suffixIcon: IconButton(onPressed: (){
-                        prodectModel(img:'', name: cont.text.toString(), price: '', dic: '');
-                        BlocProvider.of<cubitui>(context).searchdata(prodect: prodectModel(img:'', name: cont.text.toString(), price: '', dic: ''));
+                        
+                      
                       },icon: Icon(Icons.search),),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5)
@@ -41,7 +48,7 @@ class _searchState extends State<search> {
                 child: ListView.builder(
                     itemCount: mylist.length,
                     itemBuilder:(context , indext){
-                      return Padding(
+                      return mylist.length == 0 ? Center(child: Text("not found")):  Padding(
                         padding: const EdgeInsets.only(left: 20 , bottom: 10),
                         child: Row(
 
